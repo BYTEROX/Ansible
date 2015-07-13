@@ -1,8 +1,9 @@
 - name: installing soft for development
-  apt: pkg=$item
+  apt: pkg={{ item }}
   with_items:
     - apache2
     - php5
-    - postgesql
+    - postgresql
     - libapache2-mod-php5
+
     
