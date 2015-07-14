@@ -1,0 +1,37 @@
+- name: install php5 modules
+  apt:
+    name={{ item }}
+    state=present
+  notify: reload apache2
+  with_items:
+    - php5-curl
+    - php5-pgsql
+
+- name: clone symfony standard project
+  hg: repo=https://bitbucket.org/byterox/standard-symfony-project dest={{ project_dir }} purge=yes
+
+
+
+- name: install composer globally
+  shell: "curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer"
+
+- name: install vendors
+  shell: "cd {{ project_dir }} && composer install"
+
+- name: create directories for project
+  file:
+    path={{ item }}
+    state=directory
+    owner={{ deploy_user }}
+    group={{ deploy_user }}
+    recurse=yes
+  with_items:
+    - "{{ project_dir }}/app/logs"
+    - "{{ project_dir }}/app/cache"
+    - "{{ project_dir}}"
+
+- name: setting up permissions
+  shell: "setfacl -R -m u:www-data:rwX -m u:vagrant:rwX {{ project_dir }}/app/cache {{ project_dir }}/app/logs"
+
+- name: setting up permissions
+  shell: "setfacl -dR -m u:www-data:rwX -m u:vagrant:rwX {{ project_dir }}/app/cache {{ project_dir }}/app/logs"

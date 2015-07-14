@@ -1,17 +1,16 @@
 ---
 # For all machines in ansible inventory
 
-- hosts: all
+- hosts: app_forex
 
   gather_facts: no
 
   sudo: true
   sudo_user: root
 
-# Tasks before roles are applied
   pre_tasks:
     - name: update apt cache
       apt: update_cache=yes
 
   roles:
-    - devserver
+    - { role: app_forex, when: env == 'app_forex' }

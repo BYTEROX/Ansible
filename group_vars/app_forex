@@ -1,0 +1,7 @@
+env: app_forex
+
+deploy_user: vagrant
+project_dir: /var/www/app_forex
+
+
+

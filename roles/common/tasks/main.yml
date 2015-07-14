@@ -1,0 +1,23 @@
+---
+- name: install system software
+  apt:
+    name={{ item }}
+    state=present
+  with_items:
+    - git
+    - mercurial
+    - screen
+    - htop
+    - acl
+
+
+- name: set Asia/Novosibirsk timezone
+  copy:
+    src=timezone
+    dest=/etc/timezone
+    owner=root
+    group=root
+    mode=0644
+    backup=yes
+  notify:
+    - update timezone

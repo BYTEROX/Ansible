@@ -1,0 +1,20 @@
+---
+- name: install mysql5
+  apt:
+    name={{ item }}
+    state=present
+  with_items:
+    - mysql-server
+
+- name: ensure mysql is running
+  service:
+    name=mysql
+    state=running
+
+- include: vagrant.yml
+  when: env == 'vagrant'
+
+- include: prod.yml
+  when: env != 'vagrant'
+
+- include: common.yml

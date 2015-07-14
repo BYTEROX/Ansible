@@ -1,0 +1,7 @@
+#- name: copy vagrant configuration
+#  copy:
+#    dest=/etc/mysql/my.cnf
+#    src=my-vagrant.cnf
+#  notify:
+#    - restart mysql
+

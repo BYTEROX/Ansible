@@ -1,0 +1,7 @@
+#- name: copy prod configuration
+#  copy:
+#    dest=/etc/mysql/my.cnf
+#    src=my.cnf
+#  notify:
+#    - restart mysql
+
