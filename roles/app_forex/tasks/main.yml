@@ -10,8 +10,6 @@
 - name: clone symfony standard project
   hg: repo=https://bitbucket.org/byterox/standard-symfony-project dest={{ project_dir }} purge=yes
 
-
-
 - name: install composer globally
   shell: "curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer"
 
